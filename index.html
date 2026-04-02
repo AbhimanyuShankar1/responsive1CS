@@ -10,27 +10,19 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
 
     <style>
-        /* ✅ Optimized Font */
-        @font-face {
-            font-family: 'OptimizedFont';
-            src: url('https://fonts.gstatic.com/s/poppins/v20/pxiEyp8kv8JHgFVrJJfecg.woff2') format('woff2');
-            font-display: swap;
-        }
-    
-        /* ✅ Reduced font families */
         body {
             margin: 0;
-            font-family: 'OptimizedFont', sans-serif;
+            font-family: 'Segoe UI', Arial, sans-serif;
             background-color: #f8fafc;
             display: flex;
             flex-direction: column;
             min-height: 100vh;
         }
-    
+
         * {
             box-sizing: border-box;
         }
-    
+
         .navbar {
             background-color: #1e293b;
             padding: 0 20px;
@@ -42,18 +34,18 @@
             top: 0;
             z-index: 1000;
         }
-    
+
         .navbar-left {
             display: flex;
             align-items: center;
             gap: 15px;
         }
-    
+
         .logo img {
             height: 50px;
             width: auto;
         }
-    
+
         .nav-links {
             list-style: none;
             margin: 0;
@@ -61,15 +53,15 @@
             display: flex;
             align-items: center;
         }
-    
+
         .nav-item {
             margin-right: 20px;
         }
-    
+
         .nav-item.logout {
             margin-left: auto;
         }
-    
+
         .nav-link {
             text-decoration: none;
             color: #e5e7eb;
@@ -77,13 +69,13 @@
             padding: 10px;
             transition: color 0.3s;
         }
-    
+
         .nav-link:hover,
         .nav-link.active {
             color: #38bdf8;
             font-weight: 600;
         }
-    
+
         .menu-toggle {
             color: white;
             font-size: 24px;
@@ -91,13 +83,13 @@
             background: none;
             border: none;
         }
-    
+
         .dashboard-container {
             display: flex;
             flex: 1;
             position: relative;
         }
-    
+
         .sidebar {
             background-color: #ffffff;
             border-right: 1px solid #e2e8f0;
@@ -106,7 +98,7 @@
             flex-shrink: 0;
             transition: all 0.3s ease-in-out;
         }
-    
+
         .sidebar h3 {
             color: #0f172a;
             margin: 0 0 20px 0;
@@ -114,7 +106,7 @@
             padding-bottom: 10px;
             display: inline-block;
         }
-    
+
         .sidebar-link {
             text-decoration: none;
             color: #475569;
@@ -126,17 +118,17 @@
             gap: 10px;
             transition: background 0.2s;
         }
-    
+
         .sidebar-link:hover {
             background-color: #f1f5f9;
             color: #0f172a;
         }
-    
+
         .main-content {
             flex: 1;
             padding: 30px;
         }
-    
+
         .welcome-card {
             display: flex;
             align-items: center;
@@ -148,7 +140,7 @@
             margin-bottom: 30px;
             border-left: 5px solid #38bdf8;
         }
-    
+
         .welcome-card img {
             width: 80px;
             height: 80px;
@@ -156,17 +148,17 @@
             object-fit: cover;
             border: 3px solid #e2e8f0;
         }
-    
+
         .welcome-text h2 {
             margin: 0;
             color: #0f172a;
         }
-    
+
         .welcome-text p {
             margin: 5px 0 0;
             color: #64748b;
         }
-    
+
         .notification-item {
             background: white;
             border-radius: 8px;
@@ -177,37 +169,37 @@
             border-left: 4px solid transparent;
             margin-bottom: 15px;
         }
-    
+
         .notif-content {
             flex: 1;
             margin-right: 20px;
         }
-    
+
         .notif-header {
             display: flex;
             align-items: center;
             gap: 10px;
             margin-bottom: 5px;
         }
-    
+
         .notif-title {
             font-weight: 700;
             color: #334155;
             margin: 0;
         }
-    
+
         .notif-desc {
             color: #64748b;
             font-size: 14px;
             margin: 5px 0 0;
         }
-    
+
         .notif-date {
             font-size: 13px;
             color: #94a3b8;
             white-space: nowrap;
         }
-    
+
         .label {
             font-size: 11px;
             font-weight: 700;
@@ -215,37 +207,37 @@
             border-radius: 4px;
             text-transform: uppercase;
         }
-    
+
         .label-urgent {
             background-color: #fee2e2;
             color: #dc2626;
             border: 1px solid #fecaca;
         }
-    
+
         .label-info {
             background-color: #e0f2fe;
             color: #0284c7;
             border: 1px solid #bae6fd;
         }
-    
+
         .label-general {
             background-color: #f1f5f9;
             color: #64748b;
             border: 1px solid #e2e8f0;
         }
-    
+
         .border-urgent {
             border-left-color: #dc2626;
         }
-    
+
         .border-info {
             border-left-color: #0284c7;
         }
-    
+
         .border-general {
             border-left-color: #94a3b8;
         }
-    
+
         .courses-header {
             display: flex;
             justify-content: space-between;
@@ -254,7 +246,7 @@
             flex-wrap: wrap;
             gap: 10px;
         }
-    
+
         .course-card {
             background: white;
             padding: 25px;
@@ -262,34 +254,34 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
             border: 1px solid #f1f5f9;
         }
-    
+
         .course-card h4 {
             margin: 0 0 5px;
             color: #0f172a;
             font-size: 18px;
         }
-    
+
         .course-code {
             font-size: 13px;
             color: #38bdf8;
             font-weight: 700;
             margin-bottom: 10px;
         }
-    
+
         .course-desc {
             font-size: 14px;
             color: #64748b;
             line-height: 1.5;
             margin: 0;
         }
-    
+
         .search-box {
             padding: 8px 15px;
             border-radius: 20px;
             border: 1px solid #cbd5e1;
             width: 250px;
         }
-    
+
         .main-footer {
             background-color: #1e293b;
             color: #cbd5e1;
@@ -297,15 +289,162 @@
             margin-top: auto;
             border-top: 1px solid #334155;
         }
-    
+
         .footer-content {
             display: flex;
             width: 100%;
             max-width: 1400px;
             margin: 0 auto;
         }
-    
-        /* Media queries unchanged */
+
+        @media (max-width: 767px) {
+            .nav-links {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .sidebar {
+                position: absolute;
+                top: 0;
+                left: -280px;
+                width: 260px;
+                height: 100%;
+                z-index: 999;
+                box-shadow: 5px 0 15px rgba(0, 0, 0, 0.1);
+            }
+
+            .sidebar.active {
+                left: 0;
+            }
+
+            .main-content {
+                width: 100%;
+                padding: 15px;
+            }
+
+            .welcome-card {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .notification-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .notif-date {
+                margin-top: 10px;
+                align-self: flex-start;
+            }
+
+            .course-grid {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                gap: 10px;
+            }
+        }
+
+        @media (min-width: 768px) and (max-width: 1199px) {
+            .nav-links {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: none;
+            }
+
+            .sidebar {
+                position: static;
+                display: flex;
+                width: 220px;
+                left: 0;
+                height: auto;
+                box-shadow: none;
+            }
+
+            .course-grid {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+
+            .footer-content {
+                justify-content: space-between;
+                align-items: center;
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .nav-links {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: none;
+            }
+
+            .sidebar {
+                position: static;
+                display: flex;
+                width: 280px;
+                height: auto;
+                box-shadow: none;
+            }
+
+            .main-content {
+                padding: 40px;
+            }
+
+            .course-grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 30px;
+            }
+
+            .footer-content {
+                justify-content: space-between;
+                align-items: center;
+            }
+        }
+
+        .photo-gallery {
+            margin-top: 25px;
+        }
+
+        .photo-gallery-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .photo-grid img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            background: #fff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.04);
+        }
     </style>
 </head>
 
