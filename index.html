@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" as="style">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+
+    <style>
+
+        @font-face {
+     font-family: 'Poppins';
+    font-display: swap;
+}
+
+        body {
+            margin: 0;
+           font-family: 'Poppins', sans-serif;
+            background-color: #f8fafc;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        .navbar {
+            background-color: #1e293b;
+            padding: 0 20px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo img {
+            height: 50px;
+            width: auto;
+        }
+
+        .nav-links {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-item {
+            margin-right: 20px;
+        }
+
+        .nav-item.logout {
+            margin-left: auto;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #e5e7eb;
+            font-size: 16px;
+            padding: 10px;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: #38bdf8;
+            font-weight: 600;
+        }
+
+        .menu-toggle {
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+        .dashboard-container {
+            display: flex;
+            flex: 1;
+            position: relative;
+        }
+
+        .sidebar {
+            background-color: #ffffff;
+            border-right: 1px solid #e2e8f0;
+            padding: 20px;
+            flex-direction: column;
+            flex-shrink: 0;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .sidebar h3 {
+            color: #0f172a;
+            margin: 0 0 20px 0;
+            border-bottom: 2px solid #38bdf8;
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+
+        .sidebar-link {
+            text-decoration: none;
+            color: #475569;
+            padding: 12px 15px;
+            margin-bottom: 8px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: background 0.2s;
+        }
+
+        .sidebar-link:hover {
+            background-color: #f1f5f9;
+            color: #0f172a;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 30px;
+        }
+
+        .welcome-card {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            background: #ffffff;
+            padding: 30px 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            border-left: 5px solid #38bdf8;
+        }
+
+        .welcome-card img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #e2e8f0;
+        }
+
+        .welcome-text h2 {
+            margin: 0;
+            color: #0f172a;
+        }
+
+        .welcome-text p {
+            margin: 5px 0 0;
+            color: #64748b;
+        }
+
+        .notification-item {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            border-left: 4px solid transparent;
+            margin-bottom: 15px;
+        }
+
+        .notif-content {
+            flex: 1;
+            margin-right: 20px;
+        }
+
+        .notif-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 5px;
+        }
+
+        .notif-title {
+            font-weight: 700;
+            color: #334155;
+            margin: 0;
+        }
+
+        .notif-desc {
+            color: #64748b;
+            font-size: 14px;
+            margin: 5px 0 0;
+        }
+
+        .notif-date {
+            font-size: 13px;
+            color: #94a3b8;
+            white-space: nowrap;
+        }
+
+        .label {
+            font-size: 11px;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+
+        .label-urgent {
+            background-color: #fee2e2;
+            color: #dc2626;
+            border: 1px solid #fecaca;
+        }
+
+        .label-info {
+            background-color: #e0f2fe;
+            color: #0284c7;
+            border: 1px solid #bae6fd;
+        }
+
+        .label-general {
+            background-color: #f1f5f9;
+            color: #64748b;
+            border: 1px solid #e2e8f0;
+        }
+
+        .border-urgent {
+            border-left-color: #dc2626;
+        }
+
+        .border-info {
+            border-left-color: #0284c7;
+        }
+
+        .border-general {
+            border-left-color: #94a3b8;
+        }
+
+        .courses-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .course-card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            border: 1px solid #f1f5f9;
+        }
+
+        .course-card h4 {
+            margin: 0 0 5px;
+            color: #0f172a;
+            font-size: 18px;
+        }
+
+        .course-code {
+            font-size: 13px;
+            color: #38bdf8;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .course-desc {
+            font-size: 14px;
+            color: #64748b;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        .search-box {
+            padding: 8px 15px;
+            border-radius: 20px;
+            border: 1px solid #cbd5e1;
+            width: 250px;
+        }
+
+        .main-footer {
+            background-color: #1e293b;
+            color: #cbd5e1;
+            padding: 20px 40px;
+            margin-top: auto;
+            border-top: 1px solid #334155;
+        }
+
+        .footer-content {
+            display: flex;
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 767px) {
+            .nav-links {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .sidebar {
+                position: absolute;
+                top: 0;
+                left: -280px;
+                width: 260px;
+                height: 100%;
+                z-index: 999;
+                box-shadow: 5px 0 15px rgba(0, 0, 0, 0.1);
+            }
+
+            .sidebar.active {
+                left: 0;
+            }
+
+            .main-content {
+                width: 100%;
+                padding: 15px;
+            }
+
+            .welcome-card {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .notification-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .notif-date {
+                margin-top: 10px;
+                align-self: flex-start;
+            }
+
+            .course-grid {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                gap: 10px;
+            }
+        }
+
+        @media (min-width: 768px) and (max-width: 1199px) {
+            .nav-links {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: none;
+            }
+
+            .sidebar {
+                position: static;
+                display: flex;
+                width: 220px;
+                left: 0;
+                height: auto;
+                box-shadow: none;
+            }
+
+            .course-grid {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+
+            .footer-content {
+                justify-content: space-between;
+                align-items: center;
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .nav-links {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: none;
+            }
+
+            .sidebar {
+                position: static;
+                display: flex;
+                width: 280px;
+                height: auto;
+                box-shadow: none;
+            }
+
+            .main-content {
+                padding: 40px;
+            }
+
+            .course-grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 30px;
+            }
+
+            .footer-content {
+                justify-content: space-between;
+                align-items: center;
+            }
+        }
+
+        .photo-gallery {
+            margin-top: 25px;
+        }
+
+        .photo-gallery-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .photo-grid img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            background: #fff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.04);
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="navbar-left">
+            <button class="menu-toggle" onclick="toggleSidebar()">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="logo">
+                <img src="https://upload.wikimedia.org/wikipedia/en/3/3a/Lovely_Professional_University_logo.png"
+                    alt="LPU Logo">
+            </div>
+        </div>
+        <ul class="nav-links">
+            <li class="nav-item"><a class="nav-link active" href="#">Dashboard</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Course</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Students</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Resources</a></li>
+            <li class="nav-item logout"><a class="nav-link" href="#">Logout</a></li>
+        </ul>
+    </nav>
+
+    <div class="dashboard-container">
+
+        <aside class="sidebar" id="sidebar">
+            <h3>Quick Links</h3>
+            <a href="#" class="sidebar-link"><i class="fas fa-clipboard-list"></i> Attendance Reports</a>
+            <a href="#" class="sidebar-link"><i class="fas fa-file-alt"></i> Assignments</a>
+            <a href="#" class="sidebar-link"><i class="fas fa-book-open"></i> Research Publications</a>
+            <a href="#" class="sidebar-link"><i class="fas fa-calendar-check"></i> Examination Duties</a>
+            <a href="#" class="sidebar-link"><i class="fas fa-chalkboard-teacher"></i> Class Schedules</a>
+        </aside>
+
+        <main class="main-content">
+
+            <section class="welcome-card">
+                <img src="laluimages.webp"
+                    alt="Faculty Profile">
+                <div class="welcome-text">
+                    <h2>Welcome, Lalu ji</h2>
+                    <p>Here’s an overview of your academic activities and alerts.</p>
+                </div>
+            </section>
+
+            <section class="notifications-section">
+                <h3 style="color:#0f172a; margin-bottom:15px;">Recent Notifications</h3>
+                <div class="notification-list">
+
+                    <div class="notification-item border-urgent">
+                        <div class="notif-content">
+                            <div class="notif-header">
+                                <span class="label label-urgent">Deadline</span>
+                                <h4 class="notif-title">Grade Submission </h4>
+                            </div>
+                            <p class="notif-desc">Final grades for CAP450 must be submitted by this Friday via the UMS
+                                portal.</p>
+                        </div>
+                        <div class="notif-date"><i class="far fa-clock"></i> Due: Oct 25</div>
+                    </div>
+
+                    <div class="notification-item border-info">
+                        <div class="notif-content">
+                            <div class="notif-header">
+                                <span class="label label-info">Meeting</span>
+                                <h4 class="notif-title">Department Meeting</h4>
+                            </div>
+                            <p class="notif-desc">Monthly CSE department gathering to discuss the upcoming curriculum
+                                changes.</p>
+                        </div>
+                        <div class="notif-date"><i class="far fa-calendar"></i> Oct 28, 10 AM</div>
+                    </div>
+
+                    <div class="notification-item border-general">
+                        <div class="notif-content">
+                            <div class="notif-header">
+                                <span class="label label-general">Announcement</span>
+                                <h4 class="notif-title">University Event</h4>
+                            </div>
+                            <p class="notif-desc">Server maintenance scheduled for Sunday. The faculty portal may be
+                                offline.</p>
+                        </div>
+                        <div class="notif-date"><i class="far fa-calendar-alt"></i> Oct 30</div>
+                    </div>
+
+                </div>
+            </section>
+
+            <section class="courses-section">
+                <div class="courses-header">
+                    <h3 style="color:#0f172a; margin:0;">Active Courses</h3>
+                    <input type="text" class="search-box" placeholder="Search courses..." id="searchInput"
+                        onkeyup="filterCourses()">
+                </div>
+                <div class="course-grid" id="courseGrid">
+                    <div class="course-card">
+                        <h4>Responsive Web Design</h4>
+                        <div class="course-code">CAP782</div>
+                        <p class="course-desc">Fundamentals of web designing, including html and css.</p>
+                    </div>
+                    <div class="course-card">
+                        <h4>Web Customization</h4>
+                        <div class="course-code">CAP785</div>
+                        <p class="course-desc">Customize web performance by minify the css and javascript.
+                        </p>
+                    </div>
+                    <div class="course-card">
+                        <h4>Web Development</h4>
+                        <div class="course-code">WD302</div>
+                        <p class="course-desc">HTML, CSS, JavaScript, and responsive web application design.</p>
+                    </div>
+                    <div class="course-card">
+                        <h4>Database Systems</h4>
+                        <div class="course-code">DBMS210</div>
+                        <p class="course-desc">Relational databases, SQL, normalization, and transactions.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="photo-gallery">
+                <div class="photo-gallery-header">
+                    <h3 style="color:#0f172a; margin:0;">Photo Gallery</h3>
+                    <span style="color:#64748b; font-size:14px;">At least 10 photos</span>
+                </div>
+
+                <div class="photo-grid">
+                    <!-- JPG -->
+                    <img loading="lazy" src="draught-beer-png-mug.jpg" alt="Animal photo JPG (local)">
+                    
+
+                    <!-- PNG -->
+                    <img loading="lazy" src="larchick-number-1098381_1920.png" alt="Animal photo PNG (local)">
+                    
+
+                    <!-- WebP -->
+                    <img loading="lazy" src="laluimages.webp" alt="Animal photo WEBP (local)">
+
+                    <!-- SVG -->
+                    <img loading="lazy" src="library-building-icon_1774466282.svg" alt="Animal photo SVG (inline)">
+
+                    <!-- GIF -->
+                    <img loading="lazy" src="mxjfiles-goldfish-23558.gif" alt="GIF style animation (inline SVG)">
+
+                    <!--  -->
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <footer class="main-footer">
+        <div class="footer-content">
+            <span class="footer-text">Lovely Professional University &copy; 2025</span>
+            <span class="footer-text">All Rights Reserved</span>
+        </div>
+    </footer>
+</body>
+
+</html>
